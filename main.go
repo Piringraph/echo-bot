@@ -3,6 +3,10 @@ package main
 import (
 	"os"
 
+	"github.com/PaulSonOfLars/gotgbot/ext"
+	"github.com/PaulSonOfLars/gotgbot/handlers"
+	"github.com/PaulSonOfLars/gotgbot/handlers/Filters"
+
 	"github.com/PaulSonOfLars/gotgbot"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -21,6 +25,7 @@ func main() {
 	}
 	logger.Sugar().Info("UPDATER STARTED SUCCESFULLY")
 	updater.StartCleanPolling()
+	updater.Dispatcher.AddHandler(handlers.NewsMessage(Filters.Text, echo))
 }
 
 func echo(b ext.Bot, u *gotgbot.Update) error {
